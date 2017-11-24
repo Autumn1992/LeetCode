@@ -1,0 +1,37 @@
+using System;
+
+public class Solution {
+    public string LongestCommonPrefix(string[] strs) {
+        
+        var result = "";
+        System.Array.Sort(strs, (a, b) => {
+                        return a.Length < b.Length ? -1 : 1;
+                    });
+        
+        var length = strs.Length;
+        if(length == 0) 
+            return result;
+        if(length == 1)
+            return strs[0];
+        
+        for(int i = 0, max = strs[0].Length; i < max; i++){
+            
+            var matchStr = strs[0].Substring(0, i + 1);
+            
+            //Console.WriteLine(matchStr);
+            for(var j = 1; j < length; j++){
+                
+                if(!strs[j].StartsWith(matchStr)){
+                    
+                    return result;
+                }else{
+                    //Console.WriteLine("match:" + strs[j]);
+                }
+            }
+            
+            result = matchStr;
+        }
+        
+        return result;
+    }
+}
