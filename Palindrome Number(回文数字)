@@ -1,5 +1,9 @@
 using System;
 
+/**
+* 还有一种采用递归递归到底依次比对index和倒数index 比较耗栈资源 log10n
+*
+*/
 public class Solution {
     
      long Reverse(long x) {
