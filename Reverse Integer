@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution {
+
+    public int Reverse(int x) {
+        
+        // 正数比负数小1 Math.Abs会溢出 所以int.MinValue需提前判断
+        if(x == int.MinValue) return 0;
+        // 二进制移位方案(应该更快)
+        
+        int n = Math.Abs(x);
+        
+        int reverse = 0;
+        while(n > 0){
+            int temp = n % 10; 
+            if(reverse >= 214748365 || (reverse >= 214748364 && temp >= 7)) return 0; // Integer overflow at 2,147,483,647 temp >= 3 suc too
+            reverse = reverse * 10 + temp;
+            n = n / 10;
+        }
+        
+        return x >= 0 ? reverse : -reverse;
+    }
+}
