@@ -1,0 +1,60 @@
+
+ /**
+ * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+ *The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+ * soruce link:https://leetcode.com/problems/valid-parentheses/description/
+ * /
+
+using System;
+using System.Collections.Generic;
+
+/**
+* 核心思想是用栈先进后出的思想解决
+*/
+public class Solution {
+    public bool IsValid(string s) {
+        
+        var length = s.Length;
+        
+        if(length % 2 != 0){
+            return false;
+        }
+         
+        var s1 = "(";
+        var s2 = ")";
+        
+        var s3 = "{";
+        var s4 = "}";
+        
+        var s5 = "[";
+        var s6 = "]";
+        
+        var list = new List<string>();
+        
+        for(var i = 0; i < length; i++){
+            
+           var tmp = s.Substring(i, 1);
+            if(tmp.Equals(s1)){
+                 list.Add(s2);
+            }else if(tmp.Equals(s3)){
+                 list.Add(s4);
+            }else if (tmp.Equals(s5)){
+                 list.Add(s6);
+            }else{
+                var count = list.Count;
+                if(count == 0) 
+                    return false;
+                
+                var lastElement = list[count -1];
+               
+                if(!lastElement.Equals(tmp)){
+                    return false;
+                }
+                
+                list.RemoveAt(count-1);
+            }
+        }
+        
+        return list.Count == 0 ;     
+    }
+}
