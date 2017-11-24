@@ -1,0 +1,31 @@
+using System;
+
+public class Solution {
+    
+     long Reverse(long x) {
+        
+        var n = Math.Abs(x);
+        long reverse = 0;
+        while(n > 0){
+            var temp = n % 10; 
+            
+            var newReverse = reverse * 10 + temp;
+            
+            reverse = reverse * 10 + temp;
+            n = n / 10;
+        }
+        
+        return x >= 0 ? reverse : -reverse;
+    }
+    
+    public bool IsPalindrome(int x) {
+        
+        if(x < 0) return false;
+         
+        long newNumber = (long)x;
+        
+        return (Reverse(newNumber) == x);
+    }
+    
+   
+}
